@@ -60,12 +60,37 @@ public class Main {
 
         System.out.println(htmlText);
 
-        String h2Pattern = ".*<h2>.*";
+        String h2Pattern = "<h2>"; // parenthesis is a groupe
         Pattern pattern = Pattern.compile(h2Pattern); // compiling pattern into var pattern
         Matcher matcher = pattern.matcher(htmlText); // compiling string into match with compariing to pattern
-        System.out.println(matcher.matches()); // check if they match
+        System.out.println(matcher.matches()); // check if they match, can only use matcher once, have to reset.
+
+        matcher.reset();
 
         int count = 0;
-        while(matchr.find())
+        while(matcher.find()) {
+            count++;
+            System.out.println("Occurrence " + count + " : " + matcher.start() + " to " + matcher.end()); // end is index of first character after match.
+        }
+
+        String h2GroupPattern = "(<h2>.*?</h2>)"; // question mark turns it into a lazy quantifier.
+        Pattern groupePattern = Pattern.compile(h2GroupPattern);
+        Matcher groupeMatcher = groupePattern.matcher(htmlText);
+        System.out.println(groupeMatcher.matches());
+
+        groupeMatcher.reset(); // greedy and lazy quandtifiers, greedy will keep trying to find a match
+
+        while(groupeMatcher.find()) {
+            System.out.println("Occurrence " + groupeMatcher.group(1));
+        }
+
+        String h2TextGroups = "(<h2>)(.+?)(</h2>)";
+        Pattern h2TextPattern = Pattern.compile(h2TextGroups);
+        Matcher h2TextMatcher = h2TextPattern.matcher(htmlText);
+
+        while(h2TextMatcher.find()) {
+            System.out.println("Occurrence: " + h2TextMatcher.group(2));
+        }
+
     }
 }
