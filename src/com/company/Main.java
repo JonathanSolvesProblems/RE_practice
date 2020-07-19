@@ -1,5 +1,8 @@
 package com.company;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -26,23 +29,43 @@ public class Main {
 //        System.out.println(alphanumeric.replaceAll("[aei]", "X")); // replaces all occurances with X
 //        System.out.println(alphanumeric.replaceAll("[aei][Fj]", "X")); // replaces only if followed by
 
-        System.out.println("harry".replaceAll("[Hh]arry", "Harry"));
+//        System.out.println("harry".replaceAll("[Hh]arry", "Harry"));
+//
+//        String newalpha = "sajdateestjq";
+//        System.out.println(newalpha.replaceAll("[^ej]", "working")); // ^ not operator (character class)
+//        System.out.println(newalpha.replaceAll("[abcdef345678]", "X")); // regular expressions are case sensitive
+//        System.out.println(newalpha.replaceAll("[a-f3-8]", "nice"));
+//        System.out.println(newalpha.replaceAll("(?i)[a-f3-8]", "X")); // (?i) negates case sensitivity, put ?u if in unicode
+//        System.out.println(newalpha.replaceAll("\\d", "XX")); // \d for 0-9
+//        System.out.println(newalpha.replaceAll("\\D", "X")); // replaces all NON DIGITS
+//
+//        String hasWhiteSpace = "I have blanks and \ta tab and also a new line";
+//        System.out.println(hasWhiteSpace);
+//        System.out.println(hasWhiteSpace.replaceAll("\\s", "")); // removes white space
+//        System.out.println(hasWhiteSpace.replaceAll("\t", "X"));
+//        System.out.println(hasWhiteSpace.replaceAll("\\S", "")); // replaces all non-white space characters, only tab, space and newline remain
+//        System.out.println(hasWhiteSpace.replaceAll("\\w", "X")); // replaces whitespace
+//        System.out.println(hasWhiteSpace.replaceAll("\\b","X")); // replaces first/last character of each word
 
-        String newalpha = "sajdateestjq";
-        System.out.println(newalpha.replaceAll("[^ej]", "working")); // ^ not operator (character class)
-        System.out.println(newalpha.replaceAll("[abcdef345678]", "X")); // regular expressions are case sensitive
-        System.out.println(newalpha.replaceAll("[a-f3-8]", "nice"));
-        System.out.println(newalpha.replaceAll("(?i)[a-f3-8]", "X")); // (?i) negates case sensitivity, put ?u if in unicode
-        System.out.println(newalpha.replaceAll("\\d", "XX")); // \d for 0-9
-        System.out.println(newalpha.replaceAll("\\D", "X")); // replaces all NON DIGITS
+        String alpha3 = "dwqdwaJJJDW2123";
+        System.out.println(alpha3.replaceAll("^d{1}", ""));
+        System.out.println(alpha3.replaceAll("^abcDe+","YY")); // don't care how many e's follow. 1 or more, can also use * for 0 e's
+        System.out.println(alpha3.replaceAll("^d{2,5}", "YYY")); // looing between 2 and 5 e's
+        // ahh h, followed by any number of i\s woth y
+        System.out.println(alpha3.replaceAll("h+i*y", "Y"));
 
-        String hasWhiteSpace = "I have blanks and \ta tab and also a new line";
-        System.out.println(hasWhiteSpace);
-        System.out.println(hasWhiteSpace.replaceAll("\\s", "")); // removes white space
-        System.out.println(hasWhiteSpace.replaceAll("\t", "X"));
-        System.out.println(hasWhiteSpace.replaceAll("\\S", "")); // replaces all non-white space characters, only tab, space and newline remain
-        System.out.println(hasWhiteSpace.replaceAll("\\w", "X")); // replaces whitespace
-        System.out.println(hasWhiteSpace.replaceAll("\\b","X")); // replaces first/last character of each word
+        StringBuilder htmlText = new StringBuilder("<h1>My Heading</h1>");
+        htmlText.append("<h2></h2>");
+        htmlText.append("<p></p>");
 
+        System.out.println(htmlText);
+
+        String h2Pattern = ".*<h2>.*";
+        Pattern pattern = Pattern.compile(h2Pattern); // compiling pattern into var pattern
+        Matcher matcher = pattern.matcher(htmlText); // compiling string into match with compariing to pattern
+        System.out.println(matcher.matches()); // check if they match
+
+        int count = 0;
+        while(matchr.find())
     }
 }
