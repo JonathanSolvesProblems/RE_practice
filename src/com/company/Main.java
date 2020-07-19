@@ -92,5 +92,23 @@ public class Main {
             System.out.println("Occurrence: " + h2TextMatcher.group(2));
         }
 
+        // and or and not
+
+        // "abc" a followed by b - and operator implicit, folled by
+        System.out.println("harry".replaceAll("[H|h]arry", "L")); // | is or operator
+
+        // [^abc] not operator, can only use !, but in negative expression
+        String tTest = "tstvast";
+        String nTest = "t(?!v)"; // look a head syntax with ?
+        Pattern not = Pattern.compile(nTest);
+        Matcher notMatch = not.matcher(tTest);
+
+        count = 0;
+        while(notMatch.find()) {
+            count++;
+            System.out.println("Occurrence " + count + " : " + notMatch.start() + " to " + notMatch.end());
+        }
+        // t(?=v) positive look ahead
+
     }
 }
